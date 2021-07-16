@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.tizen.web.project.initializer.WebWidgetECMA3LibraryInitializer"/>
+	<classpathentry kind="con" path="org.tizen.web.project.initializer.WebWidgetTizenLibraryInitializer"/>
+	<classpathentry kind="con" path="org.tizen.web.project.initializer.ext.RESTSupport"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
