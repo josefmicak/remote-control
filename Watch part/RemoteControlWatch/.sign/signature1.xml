@@ -17,10 +17,15 @@ LBWSOkGXMg==</DigestValue>
 <DigestValue>raWnftvm8E2+q3LKa54pdG+VS2pejG9u0IjSWCDf3SJ924IBPHFP3NT32hhFMqc5R2wlBEHTAzGs
 pjnDFVp/jA==</DigestValue>
 </Reference>
+<Reference URI="Images%2Fbanner.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
+<DigestValue>QHIyDltopbKIAJMqm9G6vJJNGitHWj7rm4VdkX4wc9GuzXKj5VhJCuRdHcWVWuPzIi1VdyIZQOWo
+3R3EkQQnzA==</DigestValue>
+</Reference>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>TQ7n8rqJC+Du2RxBjMEuDtB34vuZzN7r2S5XSf+ezrX0XEDo3haiquAItjVHzA7kZIq39FkLgP22
-yHJeBE45EA==</DigestValue>
+<DigestValue>+cdeyygQv1Jjhgl0/5+lLIlYq3baO8bRe+etbEPR/ET0g6NFdbo+LLz0yAtlSbXH3ZC0iaqXk2WJ
+FkCBQTP0/w==</DigestValue>
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -29,13 +34,13 @@ yHJeBE45EA==</DigestValue>
 </Reference>
 <Reference URI="icon.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>tsvxKNWthzpmr2ZrV+bDS+AVpESdCz6TlMrI8E7QtLamR5nkjjXpjdLxKu2NYuanI8/SejAGZ/9H
-fNzLGJ1wUA==</DigestValue>
+<DigestValue>cL3aDrRCz15/O8UZLh/ieg1PWJxdAeknDM5XYhCz2bScFGUWNrJ4TATfEMU1b214dHb9QdHTJ2vA
+lM2a1YTXoA==</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>10Lyu7OPXfxXchOG9pQ+SVyduStICCPhDo0m3y6jb+2XhFlfr43jDATM8hD3lky3BwIZ3Lm+iwqE
-iaWMd7JZew==</DigestValue>
+<DigestValue>eM9J/9zoWH2a1sGNWshPYO139LL7YwzZyIez3VPs7+IZo1j/wVC7rgO2XzgGjXjXPPmKlWeyKcnq
+TrCQBFXU9A==</DigestValue>
 </Reference>
 <Reference URI="script.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -44,8 +49,13 @@ iaWMd7JZew==</DigestValue>
 </Reference>
 <Reference URI="style.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>vsLRuP1na6ZXW8VHOGkPQC7LdtE6d9BgPkWrZjjBDB3HxdIympBTwjZnl3nVUHsqX4BgPsvnUoGw
-r6NbY8Qf8A==</DigestValue>
+<DigestValue>vhmTkhHDYzqvqFBxhFClrrgFOQdfB1kmSer1yC6983SqCsIgJh9r9CiXgEPVLZtbrmWyB3cHjIVZ
+qdRsixYNcA==</DigestValue>
+</Reference>
+<Reference URI="widget%2FRemoteControlWatch%2FImages%2FBanner.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
+<DigestValue>QHIyDltopbKIAJMqm9G6vJJNGitHWj7rm4VdkX4wc9GuzXKj5VhJCuRdHcWVWuPzIi1VdyIZQOWo
+3R3EkQQnzA==</DigestValue>
 </Reference>
 <Reference URI="widget%2FRemoteControlWatch%2FImages%2FLeftArrow.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -64,8 +74,8 @@ pjnDFVp/jA==</DigestValue>
 </Reference>
 <Reference URI="widget%2FRemoteControlWatch%2Findex.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>10Lyu7OPXfxXchOG9pQ+SVyduStICCPhDo0m3y6jb+2XhFlfr43jDATM8hD3lky3BwIZ3Lm+iwqE
-iaWMd7JZew==</DigestValue>
+<DigestValue>eM9J/9zoWH2a1sGNWshPYO139LL7YwzZyIez3VPs7+IZo1j/wVC7rgO2XzgGjXjXPPmKlWeyKcnq
+TrCQBFXU9A==</DigestValue>
 </Reference>
 <Reference URI="widget%2FRemoteControlWatch%2Fpreview.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
@@ -79,8 +89,8 @@ iaWMd7JZew==</DigestValue>
 </Reference>
 <Reference URI="widget%2FRemoteControlWatch%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"></DigestMethod>
-<DigestValue>vsLRuP1na6ZXW8VHOGkPQC7LdtE6d9BgPkWrZjjBDB3HxdIympBTwjZnl3nVUHsqX4BgPsvnUoGw
-r6NbY8Qf8A==</DigestValue>
+<DigestValue>2yrKRV/E+GtR0UskU62WlNK4fLmLUtgYAU9BPd6t2MAdcfUFJTapGI+mIWggo4uch7KVL6QhQn7M
+wHAoD7HCSg==</DigestValue>
 </Reference>
 <Reference URI="#prop">
 <Transforms>
@@ -92,11 +102,11 @@ GyvKX9Snig==</DigestValue>
 </Reference>
 </SignedInfo>
 <SignatureValue>
-IIyZ00UWvE3bsRSppImLiWLWU8YThN8PskN/Q5oYyzD++aY7YFTQJ2jSi7VTEXdVpafh7XeCW9qa
-+Uj9XGXGO1lqQC2NDMuF3FB/Un3Tfo1LFWFgZdSofoAncHc/tYDcE4rPfH1x6v3OnVjaqqwFhPhm
-6dSQ/eKSaWyky6dRW6SH+JUfWn4O39RXmxGiNbNqX6aXLMDqYQFz/yJf2hA6I/KwzWP6U62G242E
-DPgbBzktnoMfw0ulbmuCn48TaFTQ1wxNBowB+8x0qI+icZKZUwdknehoOpPhFIIMt06CS5a6Zy7o
-SLOTdumhrkey3GM2mEcA9IF8JktM6iWqRA5LLA==
+Tee9IeKoirkkHb+EW91azW2j5DdbQWL9nf0zQJc82la+UUpItisKfW9VjQKHwVrQAAjLfC75ZW+j
+eecXlcPvLZAj2Mr7JPCSWR185VuRavaNjhFo5A+LE5hxHyja/VFJrxcLtqEfWDaacK6q7XmBSeqF
+aj1duRFlSyVgRJFbkQF90Xzrm8IDeq9x1SnBQfqsSueMpVKtb8UaVBsLtgq1fKsyYyDSA+k53t2F
+5ey6gkbRr8xPLesvgWE6iP84vsD5x3Y4rMDKNKUwvoDFrRb+mGYZPBuh5AP+2ZgvwS5Qrk3d7AsJ
+OxJYvV1OGHwKwbjBZeHBY66/UpO7zrZEmDM9eg==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

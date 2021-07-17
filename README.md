@@ -4,7 +4,6 @@ Allows the user to use the computer's keyboard from other devices. It's mainly m
 - Left Arrow key - rewind
 - Right Arrow key - forward
 
-<p align="center">![Website](./Images/Website.png)</p>
 <p align="center"> 
 <img src="Images/Website.png">
 </p>
@@ -25,6 +24,6 @@ Provides a way to perform remote key presses using a website. It's not required 
 
 ## Watch part
 
-*Languages used: HTML, CSS, JavaSscript*
+*Languages used: HTML, CSS, JavaScript*
 
 Provides a way to perform remote key presses using a smart watch. The application has been successfully tested on a real device (Samsung Galaxy Watch Active2) and it can probably only be used on Tizen OS-based watches. Includes a widget.
