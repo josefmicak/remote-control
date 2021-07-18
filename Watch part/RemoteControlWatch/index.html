@@ -3,17 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
     <title>Remote control</title>
-
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <script src="script.js"></script>
 </head>
 
 <body>
 	<div class="banner"></div>
-	<button class="leftButton" type="button" onclick="sendtext('left');"></button>
-    <button class="rightButton" type="button" onclick="sendtext('right');"></button>
-    <button class="spaceButton" type="button" onclick="sendtext('space');"></button>
+	<div class="indicatorLight" id="messageIndicatorLight"></div>
+    <button class="leftButton" type="button" onclick="sendText('left');"></button>
+    <button class="rightButton" type="button" onclick="sendText('right');"></button>
+    <button class="spaceButton" type="button" onclick="sendText('space');"></button>
+    <script src="script.js"></script>
 </body>
 </html>

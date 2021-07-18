@@ -19,7 +19,7 @@ Detects remote key presses and immediately performs them. For now there's no GUI
 
 *Languages used: HTML, CSS, JavaSscript, PHP*
 
-Provides a way to perform remote key presses using a website. It's not required to use all the files included in this part, the only required file is *sendKeyStroke.PHP*.
+Provides a way to perform remote key presses using a website. It's not required to use all the files included in this part, the only required file is *sendKeyStroke.php*.
 
 
 ## Watch part
