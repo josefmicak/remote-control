@@ -1,39 +1,98 @@
+var responseKey = "0";
+
 function sendText(selectedKeyStroke)
 {
     var http = new XMLHttpRequest();
     var url = 'sendKeyStroke.php';
-    var key = 'key=' + Math.floor(Math.random() * 10001);
-    var keyStroke = 'keystroke=' + selectedKeyStroke;
-    var params = key + '&' + keyStroke;
-    
+    var type = 'type=1';
+    var messageKey = 'messageKey=' + Math.floor(Math.random() * 10001);
+    var keyStroke = 'keyStroke=' + selectedKeyStroke;
+    var params = type + '&' + messageKey + '&' + keyStroke;    
+
+    responseKey = getResponseKey();
+
     http.open('POST', url, true);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    http.onreadystatechange = function() {
-    if(http.readyState == 4 && http.status == 200) 
+    http.onreadystatechange = function()
     {
-        controlIndicatorLight('y')
-        console.log(selectedKeyStroke + " key pressed");
+        if(http.readyState == 4 && http.status == 200)
+        {
+            controlIndicatorLight(1, 'y');
+            console.log(selectedKeyStroke + " key pressed");
+        }
+        else
+        {
+            controlIndicatorLight(1, 'n');
+        }
     }
-    else
+    http.send(params);
+
+    setTimeout(function()
     {
-        controlIndicatorLight('n')
-        console.log("Error");
-    }
-}
-http.send(params);
+        var newResponseKey = getResponseKey();
+        if(newResponseKey != responseKey)
+        {
+            controlIndicatorLight(2, 'y');
+        }
+        else
+        {
+            controlIndicatorLight(2, 'n')
+        }
+    }, 1500);
 }
 
-function controlIndicatorLight(success)
+function getResponseKey()
 {
-    if(success == 'y')
+    var r = new XMLHttpRequest();
+    r.open('GET', 'getResponseKey.php', false);
+    r.send(null); 
+    if (r.status == 200)
     {
-        document.getElementById("messageIndicatorLight").style.backgroundColor = "limegreen";
+    	var responseKeyToReturn = 0;
+    	var responseKeyChars = r.responseText.slice(-5);
+    	var responseKeySplit = responseKeyChars.split(">");
+    	if(responseKeySplit[1] == null)
+    	{
+    		responseKeyToReturn = responseKeySplit[0];
+    	}
+    	else
+    	{
+    		responseKeyToReturn = responseKeySplit[1];
+    	}
+    }
+    return responseKeyToReturn;
+}
+
+function controlIndicatorLight(lightId, success)
+{
+    if(lightId == 1)
+    {
+        if(success == 'y')
+	    {
+	        document.getElementById("messageIndicatorLight").style.backgroundColor = "limegreen";
+	    }
+	    else
+	    {
+	        document.getElementById("messageIndicatorLight").style.backgroundColor = "red";
+	    }
+        setTimeout(function()
+        {
+            document.getElementById("messageIndicatorLight").style.backgroundColor = "cyan";
+        }, 2000);
     }
     else
     {
-        document.getElementById("messageIndicatorLight").style.backgroundColor = "red";
+        if(success == 'y')
+	    {
+	        document.getElementById("responseIndicatorLight").style.backgroundColor = "limegreen";
+	    }
+	    else
+	    {
+	        document.getElementById("responseIndicatorLight").style.backgroundColor = "red";
+	    }
+        setTimeout(function()
+        {
+            document.getElementById("responseIndicatorLight").style.backgroundColor = "cyan";
+        }, 2000);
     }
-    setTimeout(function() {
-        document.getElementById("messageIndicatorLight").style.backgroundColor = "cyan";
-      }, 2000);
 }

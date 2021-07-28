@@ -28,14 +28,13 @@ body{
     background-color: cyan;
     border-radius: 50%;
     position: absolute;
-    width: 3%;
+    width: 6%;
     height:0;
-    padding-bottom: 3%;
+    padding-bottom: 6%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    top: 20%;
-    left: 78%
+    top: 23%;
 }
 
 .leftButton{

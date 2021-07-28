@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/RemoteControlWatch" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/RemoteControlWatch" version="1.0.0" viewmodes="maximized">
+    <access origin="*" subdomains="true"/>
     <tizen:app-widget id="jggVPvkV6S.RemoteControlWatch.RemoteControlWatch" primary="true">
         <tizen:widget-label>Remote control watch</tizen:widget-label>
         <tizen:widget-content src="widget/RemoteControlWatch/index.html">
@@ -11,5 +12,6 @@
     <feature name="http://tizen.org/feature/screen.size.normal"/>
     <icon src="icon.png"/>
     <name>RemoteControlWatch</name>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
     <tizen:profile name="wearable"/>
 </widget>
