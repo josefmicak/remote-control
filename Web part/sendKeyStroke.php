@@ -19,8 +19,6 @@
     {
         $messageKey = $paramsSplit[0];
         $keyStroke = $paramsSplit[1];
-        //$messageKey = 1;
-        //$keyStroke = "left";
         $responseKey = $_POST['responseKey'];
     }
 

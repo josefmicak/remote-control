@@ -37,7 +37,15 @@ body{
     top: 23%;
 }
 
-.leftButton{
+#messageIndicatorLight{
+    left: 78%;
+}
+
+#responseIndicatorLight{
+    left: 82%;
+}
+
+#leftButton{
     background-image: url("Images/LeftArrow.png");
     background-position: center;
     background-size: 40% 45%;
@@ -54,7 +62,7 @@ body{
     left: 15%;
 }
 
-.rightButton{
+#rightButton{
     background-image: url("Images/RightArrow.png");
     background-position: center;
     background-size: 40% 45%;
@@ -71,7 +79,7 @@ body{
     left: 55%;
 }
 
-.spaceButton{
+#spaceButton{
     background-image: url("Images/SpaceBar.png");
     background-position: center;
     background-size: 40% 200%;

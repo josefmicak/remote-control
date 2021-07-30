@@ -1,11 +1,9 @@
 from random import random
-
 import requests
 import time
 import random
 from pynput.keyboard import Key, Controller
 
-link = "http://YOUR.WEBSITE/file.txt"
 oldValue = "temp"
 newValue = "temp"
 iterationsCounter = 0
@@ -19,14 +17,12 @@ def send_response():
 
 
 while True:
-    siteText = requests.get(link)
-    siteContent = siteText.text
-    siteContentSplit = siteContent.split()
-    newValue = siteContentSplit[0]
+    response = requests.get("http://YOUR.WEBSITE/getKeyValues.php")
+    newValue = response.json().get("messageKey")
 
     if newValue != oldValue and oldValue != "temp":
         keyboard = Controller()
-        key = getattr(Key, siteContentSplit[1])
+        key = getattr(Key, response.json().get("keyStroke"))
         keyboard.press(key)
         keyboard.release(key)
         keyPressed = True
@@ -34,7 +30,7 @@ while True:
         print('Key pressed: ', str(key))
         send_response()
 
-    oldValue = siteContentSplit[0]
+    oldValue = response.json().get("messageKey")
     if iterationsCounter >= 30:
         keyPressed = False
         iterationsCounter = 0

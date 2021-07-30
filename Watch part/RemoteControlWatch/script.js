@@ -8,18 +8,34 @@ document.addEventListener('tizenhwkey', function(e) {
 	}
 });}
 
-var responseKey = "0";
-
 function sendText(selectedKeyStroke)
 {
+    //the space key gets disabled for a second after pressing it because otherwise it keeps being indefinitely automatically pressed
+    if(selectedKeyStroke == "space")
+    {
+        document.getElementById("spaceButton").disabled = true;
+        setTimeout(function()
+        {
+            document.getElementById("spaceButton").disabled = false;
+        }, 1000);
+    }
     var http = new XMLHttpRequest();
-    var url = 'http://YOUR.WEBSITE/sendKeyStroke.php';
+    var url = 'http://testt.8u.cz/sendKeyStroke.php';
     var type = 'type=1';
     var messageKey = 'messageKey=' + Math.floor(Math.random() * 10001);
     var keyStroke = 'keyStroke=' + selectedKeyStroke;
     var params = type + '&' + messageKey + '&' + keyStroke;    
 
-    responseKey = getResponseKey();
+    var responseKey = 0;
+    fetch('http://testt.8u.cz/getKeyValues.php')
+    .then(response => 
+    {
+        return response.json();
+    })
+    .then(response =>
+    {
+        responseKey = response.responseKey;
+    });
 
     http.open('POST', url, true);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -34,44 +50,35 @@ function sendText(selectedKeyStroke)
         {
             controlIndicatorLight(1, 'n');
         }
-    }
+    };
     http.send(params);
 
     setTimeout(function()
     {
-        var newResponseKey = getResponseKey();
-        if(newResponseKey != responseKey)
+        var newResponseKey = 0;
+        fetch('http://testt.8u.cz/getKeyValues.php')
+        .then(response => 
         {
-            controlIndicatorLight(2, 'y');
-        }
-        else
+            return response.json();
+        })
+        .then(response =>
         {
-            controlIndicatorLight(2, 'n')
-        }
+            newResponseKey = response.responseKey;
+        })
+        .then(response =>
+        {
+            if(newResponseKey != responseKey)
+            {
+                controlIndicatorLight(2, 'y');
+            }
+            else
+            {
+                controlIndicatorLight(2, 'n');
+            }
+        });
     }, 1500);
 }
 
-function getResponseKey()
-{
-    var r = new XMLHttpRequest();
-    r.open('GET', 'http://YOUR.WEBSITE/getResponseKey.php', false);
-    r.send(null); 
-    if (r.status == 200)
-    {
-    	var responseKeyToReturn = 0;
-    	var responseKeyChars = r.responseText.slice(-5);
-    	var responseKeySplit = responseKeyChars.split(">");
-    	if(responseKeySplit[1] == null)
-    	{
-    		responseKeyToReturn = responseKeySplit[0];
-    	}
-    	else
-    	{
-    		responseKeyToReturn = responseKeySplit[1];
-    	}
-    }
-    return responseKeyToReturn;
-}
 
 function controlIndicatorLight(lightId, success)
 {
