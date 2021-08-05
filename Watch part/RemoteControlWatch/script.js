@@ -34,7 +34,7 @@ function sendText(selectedKeyStroke)
     })
     .then(response =>
     {
-        responseKey = response.responseKey;
+        responseKey = response[0].responseKey;
     });
 
     http.open('POST', url, true);
@@ -63,7 +63,7 @@ function sendText(selectedKeyStroke)
         })
         .then(response =>
         {
-            newResponseKey = response.responseKey;
+            newResponseKey = response[0].responseKey;
         })
         .then(response =>
         {

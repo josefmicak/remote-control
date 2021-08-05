@@ -1,7 +1,7 @@
-from random import random
 import requests
 import time
 import random
+import json
 from pynput.keyboard import Key, Controller
 
 oldValue = "temp"
@@ -13,16 +13,18 @@ keyPressed = False
 def send_response():
     data = {'responseKey': random.randint(1, 10000),
             'type': '2'}
-    requests.post(url="http://YOUR.WEBSITE/sendKeyStroke.php", data=data)
+    requests.post(url="http://testt.8u.cz/sendKeyStroke.php", data=data)
 
 
 while True:
-    response = requests.get("http://YOUR.WEBSITE/getKeyValues.php")
-    newValue = response.json().get("messageKey")
+    response = requests.get("http://testt.8u.cz/getKeyValues.php")
+    result = response.text
+    result = json.loads(result)
+    newValue = result[0].get("messageKey")
 
     if newValue != oldValue and oldValue != "temp":
         keyboard = Controller()
-        key = getattr(Key, response.json().get("keyStroke"))
+        key = getattr(Key, result[0].get("keyStroke"))
         keyboard.press(key)
         keyboard.release(key)
         keyPressed = True
@@ -30,7 +32,7 @@ while True:
         print('Key pressed: ', str(key))
         send_response()
 
-    oldValue = response.json().get("messageKey")
+    oldValue = result[0].get("messageKey")
     if iterationsCounter >= 30:
         keyPressed = False
         iterationsCounter = 0

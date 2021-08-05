@@ -1,26 +1,32 @@
 <?php 
+    include('db_connection.php');
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-    
+
+    $sql_select = 'SELECT * FROM KeyValues WHERE id = 1';
+    $result = mysqli_query($conn, $sql_select);
+    $keyValuesArray = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+
     $type = $_POST['type'];
-    $file = "file.txt";
-    $fileText = fopen($file, "rt");
-    $params = fgets($fileText);
-    $paramsSplit = explode(" ", $params);
-    
     if($type == 1)//message from remote device
     {
-        $messageKey = $_POST['messageKey'];
-        $keyStroke = $_POST['keyStroke'];
-        $responseKey = $paramsSplit[2];
+        $messageKey = mysqli_real_escape_string($conn, $_POST['messageKey']);
+        $keyStroke = mysqli_real_escape_string($conn, $_POST['keyStroke']);
+        $responseKey = $keyValuesArray[0]['responseKey'];
     }
     else//response from desktop
     {
-        $messageKey = $paramsSplit[0];
-        $keyStroke = $paramsSplit[1];
-        $responseKey = $_POST['responseKey'];
+        $messageKey = $keyValuesArray[0]['messageKey'];
+        $keyStroke = $keyValuesArray[0]['keyStroke'];
+        $responseKey = mysqli_real_escape_string($conn, $_POST['responseKey']);
     }
-
-    file_put_contents($file, $messageKey . ' ' . $keyStroke . ' ' . $responseKey);
+    $sql_insert = "INSERT INTO KeyValues(id, messageKey, keyStroke, responseKey)
+    VALUES (1, '$messageKey', '$keyStroke', '$responseKey')
+    ON DUPLICATE KEY UPDATE messageKey = '$messageKey', keyStroke = '$keyStroke', responseKey = '$responseKey';";
+    if(!mysqli_query($conn, $sql_insert))
+    {
+        echo "Query error: " . mysqli_error($conn);
+    }
 ?>
