@@ -7,7 +7,7 @@ body{
     height: 100%;
 }
 
-.banner{
+#banner{
     background-image: url("Images/Banner.png");
     background-position: center;
     background-size: 100% 100%;
@@ -21,7 +21,96 @@ body{
     width: 50%;
     height: 10%;
     top: 10%;
-    left: 25%;
+    left: 15%;
+}
+
+.clickableButton:hover{
+    background-color: #d9d9d9 !important;
+}
+
+#aboutButton{
+    background-image: url("Images/About.png");
+    background-position: center;
+    background-size: 100% 100%;
+    background-color: white;
+    background-repeat: no-repeat;
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 10px;
+    position: absolute;
+    width: 5%;
+    height: 0%;
+    padding-bottom: 5%;
+    top: 10%;
+    left: 73%;
+}
+
+.modal{
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+  
+.modal-content{
+    background-color: black;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    font-size: 30px;
+    color: white;
+}
+
+.close{
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+} 
+
+a:link{
+    color: white;
+}
+
+a:visited{
+    color: white;
+}
+
+a:hover{
+    color: #d9d9d9;
+}
+
+#settingsButton{
+    background-image: url("Images/Settings.png");
+    background-position: center;
+    background-size: 100% 100%;
+    background-color: white;
+    background-repeat: no-repeat;
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 10px;
+    position: absolute;
+    width: 5%;
+    height: 0%;
+    padding-bottom: 5%;
+    top: 10%;
+    left: 80%;
 }
 
 .indicatorLight{

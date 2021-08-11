@@ -103,3 +103,38 @@ function controlIndicatorLight(lightId, success)
         }, 2000);
     }
 }
+
+var aboutModal = document.getElementById("aboutModal");
+var settingsModal = document.getElementById("settingsModal");
+
+var aboutButton = document.getElementById("aboutButton");
+var settingsButton = document.getElementById("settingsButton");
+
+var aboutModalClose = document.getElementsByClassName("close")[0];
+var settingsModalClose = document.getElementsByClassName("close")[1];
+
+aboutButton.onclick = function() {
+    aboutModal.style.display = "block";
+}
+
+settingsButton.onclick = function() {
+    settingsModal.style.display = "block";
+}
+
+aboutModalClose.onclick = function() {
+    aboutModal.style.display = "none";
+}
+
+settingsModalClose.onclick = function() {
+    settingsModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == aboutModal) {
+        aboutModal.style.display = "none";
+    }
+
+    if (event.target == settingsModal) {
+        settingsModal.style.display = "none";
+    }
+} 
