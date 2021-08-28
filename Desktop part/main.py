@@ -20,11 +20,14 @@ while True:
     response = requests.get("http://testt.8u.cz/getKeyValues.php")
     result = response.text
     result = json.loads(result)
+    print(result)
     newValue = result[0].get("messageKey")
 
     if newValue != oldValue and oldValue != "temp":
         keyboard = Controller()
-        key = getattr(Key, result[0].get("keyStroke"))
+        key = result[0].get("keyStroke")
+        if len(key) > 1:
+            key = getattr(Key, result[0].get("keyStroke"))
         keyboard.press(key)
         keyboard.release(key)
         keyPressed = True

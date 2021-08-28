@@ -20,16 +20,11 @@ body{
     position: absolute;
     width: 50%;
     height: 10%;
-    top: 10%;
+    top: 5%;
     left: 15%;
 }
 
-.clickableButton:hover{
-    background-color: #d9d9d9 !important;
-}
-
-#aboutButton{
-    background-image: url("Images/About.png");
+.clickableButton{
     background-position: center;
     background-size: 100% 100%;
     background-color: white;
@@ -42,8 +37,22 @@ body{
     width: 5%;
     height: 0%;
     padding-bottom: 5%;
-    top: 10%;
+    top: 5%;
+    cursor: pointer;
+}
+
+.clickableButton:hover{
+    background-color: #d9d9d9 !important;
+}
+
+#aboutButton{
+    background-image: url("Images/About.png");
     left: 73%;
+}
+
+#settingsButton{
+    background-image: url("Images/Settings.png");
+    left: 80%;
 }
 
 .modal{
@@ -69,8 +78,37 @@ body{
     color: white;
 }
 
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=text]{
+    font-size:2em;
+}
+  
+input[type=submit] {
+    width: 100%;
+    background-color: white;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+input[type=submit]:hover {
+    background-color: #d9d9d9;
+}
+
 .close{
-    color: #aaa;
+    color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -78,7 +116,7 @@ body{
   
 .close:hover,
 .close:focus{
-    color: black;
+    color: red;
     text-decoration: none;
     cursor: pointer;
 } 
@@ -95,24 +133,6 @@ a:hover{
     color: #d9d9d9;
 }
 
-#settingsButton{
-    background-image: url("Images/Settings.png");
-    background-position: center;
-    background-size: 100% 100%;
-    background-color: white;
-    background-repeat: no-repeat;
-    border-width: 3px;
-    border-color: black;
-    border-style: solid;
-    border-radius: 10px;
-    position: absolute;
-    width: 5%;
-    height: 0%;
-    padding-bottom: 5%;
-    top: 10%;
-    left: 80%;
-}
-
 .indicatorLight{
     background-color: cyan;
     border-radius: 50%;
@@ -123,7 +143,7 @@ a:hover{
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    top: 23%;
+    top: 18%;
 }
 
 #messageIndicatorLight{
@@ -147,8 +167,9 @@ a:hover{
     position: absolute;
     width: 30%;
     height: 20%;
-    top: 30%;
+    top: 25%;
     left: 15%;
+    cursor: pointer;
 }
 
 #rightButton{
@@ -164,8 +185,9 @@ a:hover{
     position: absolute;
     width: 30%;
     height: 20%;
-    top: 30%;
+    top: 25%;
     left: 55%;
+    cursor: pointer;
 }
 
 #spaceButton{
@@ -181,6 +203,46 @@ a:hover{
     position: absolute;
     width: 70%;
     height: 15%;
-    top: 60%;
+    top: 50%;
     left: 15%;
+    cursor: pointer;
+}
+
+.changeableKeyButton{
+    background-position: center;
+    background-size: 100% 100%;
+    background-color: white;
+    background-repeat: no-repeat;
+    border-width: 3px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 10px;
+    position: absolute;
+    width: 10%;
+	aspect-ratio: 1;
+	display: grid;
+	align-content: center;
+    top: 70%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 8vw;
+    font-family: "Lucida Console", "Courier New", monospace;
+    cursor: pointer;
+}
+
+.changeableKeyButton:hover{
+    background-color: #d9d9d9 !important;
+}
+
+#changeableKeyButton1{
+    left: 15%;
+}
+
+#changeableKeyButton2{
+    left: 45%;
+}
+
+#changeableKeyButton3{
+    left: 75%;
 }

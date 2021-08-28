@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Remote control</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div id="banner"></div>
+        <div class="clickableButton" id="aboutButton"></div>
+
+        <div id="aboutModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>
+                    <h2>Functionality</h2>
+                    <h3>Indicator lights</h3>
+                    The page contains two <font color=cyan>cyan</font> indicator lights. The lights brifly turn <font color=limegreen>green</font> if an action is successful and <font color=red>red</font> if an action is unsuccessful.
+                    The first light checks whether the key press has been successfully sent. This is mostly useful on the smart watch because they don't require uninterrupted internet connection to function.
+                    The second light checks whether the key press has been successfully performed. This doesn't happen in case the desktop part is not currently running.
+                    <h2>General information</h2>
+                    This website is part of a project called "Remote control".<br>
+                    Its purpose is to make it possible to control your computer from remote devices.<br>
+                    Further explanation, as well as the source code can be obtained at <a href="https://github.com/josefmicak/remote-control">https://github.com/josefmicak/remote-control</a>
+                </p>
+            </div> 
+        </div>
+
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form onsubmit="saveChangableKeyValues();">
+                    <label for="firstChangeableKey">First changeable key:</label>
+                    <input type="text" id="firstChangeableKey" name="firstChangeableKey" maxlength="1"><br><br>
+                    <label for="secondChangeableKey">Second changeable key:</label>
+                    <input type="text" id="secondChangeableKey" name="secondChangeableKey" maxlength="1"><br><br>
+                    <label for="thirdChangeableKey">Third changeable key:</label>
+                    <input type="text" id="thirdChangeableKey" name="thirdChangeableKey" maxlength="1"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div> 
+        </div>
+
+        <div class="clickableButton" id="settingsButton"></div>
+        <div class="indicatorLight" id="messageIndicatorLight"></div>
+	    <div class="indicatorLight" id="responseIndicatorLight"></div>
+        <button class="clickableButton" id="leftButton" type="button" onclick="sendText('left');"></button>
+        <button class="clickableButton" id="rightButton" type="button" onclick="sendText('right');"></button>
+        <button class="clickableButton" id="spaceButton" type="button" onclick="sendText('space');"></button>
+        <div class="changeableKeyButton" id="changeableKeyButton1" type="button" onclick="sendText('firstButton');"></div>
+        <div class="changeableKeyButton" id="changeableKeyButton2" type="button" onclick="sendText('secondButton');"></div>
+        <div class="changeableKeyButton" id="changeableKeyButton3" type="button" onclick="sendText('thirdButton');"></div>
+        <script src="script.js"></script>
+    </body>
+</html> 
