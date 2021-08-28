@@ -8,8 +8,23 @@ document.addEventListener('tizenhwkey', function(e) {
 	}
 });}
 
+var changeableKeyButton1, changeableKeyButton2, changeableKeyButton3;
+window.onload = loadChangableKeyValues;
+
 function sendText(selectedKeyStroke)
 {
+    if(selectedKeyStroke == "firstButton")
+    {
+        selectedKeyStroke = document.getElementById("changeableKeyButton1").textContent;
+    }
+    else if(selectedKeyStroke == "secondButton")
+    {
+        selectedKeyStroke = document.getElementById("changeableKeyButton2").textContent;
+    }
+    else if(selectedKeyStroke == "thirdButton")
+    {
+        selectedKeyStroke = document.getElementById("changeableKeyButton3").textContent;
+    }
     //the space key gets disabled for a second after pressing it because otherwise it keeps being indefinitely automatically pressed
     if(selectedKeyStroke == "space")
     {
@@ -20,14 +35,14 @@ function sendText(selectedKeyStroke)
         }, 1000);
     }
     var http = new XMLHttpRequest();
-    var url = 'http://testt.8u.cz/sendKeyStroke.php';
+    var url = 'sendKeyStroke.php';
     var type = 'type=1';
     var messageKey = 'messageKey=' + Math.floor(Math.random() * 10001);
     var keyStroke = 'keyStroke=' + selectedKeyStroke;
     var params = type + '&' + messageKey + '&' + keyStroke;    
 
     var responseKey = 0;
-    fetch('http://testt.8u.cz/getKeyValues.php')
+    fetch('getKeyValues.php')
     .then(response => 
     {
         return response.json();
@@ -56,7 +71,7 @@ function sendText(selectedKeyStroke)
     setTimeout(function()
     {
         var newResponseKey = 0;
-        fetch('http://testt.8u.cz/getKeyValues.php')
+        fetch('getKeyValues.php')
         .then(response => 
         {
             return response.json();
@@ -78,7 +93,6 @@ function sendText(selectedKeyStroke)
         });
     }, 1500);
 }
-
 
 function controlIndicatorLight(lightId, success)
 {
@@ -113,3 +127,72 @@ function controlIndicatorLight(lightId, success)
         }, 2000);
     }
 }
+
+function loadChangableKeyValues()
+{
+    var changeableKeyButton1 = localStorage.getItem('changeableKeyButton1');
+    if(null === changeableKeyButton1)
+    {
+        changeableKeyButton1 = 'A';
+    }
+    var changeableKeyButton2 = localStorage.getItem('changeableKeyButton2');
+    if(null === changeableKeyButton2)
+    {
+        changeableKeyButton2 = 'B';
+    }
+    var changeableKeyButton3 = localStorage.getItem('changeableKeyButton3');
+    if(null === changeableKeyButton3)
+    {
+        changeableKeyButton3 = 'C';
+    }
+
+    document.getElementById("changeableKeyButton1").textContent = changeableKeyButton1;
+    document.getElementById("changeableKeyButton2").textContent = changeableKeyButton2;
+    document.getElementById("changeableKeyButton3").textContent = changeableKeyButton3;
+
+    document.getElementById("firstChangeableKey").value = changeableKeyButton1;
+    document.getElementById("secondChangeableKey").value = changeableKeyButton2;
+    document.getElementById("thirdChangeableKey").value = changeableKeyButton3;
+}
+
+function saveChangableKeyValues()
+{
+    localStorage.setItem('changeableKeyButton1', document.getElementById("firstChangeableKey").value);
+    localStorage.setItem('changeableKeyButton2', document.getElementById("secondChangeableKey").value);
+    localStorage.setItem('changeableKeyButton3', document.getElementById("thirdChangeableKey").value);
+}
+
+var aboutModal = document.getElementById("aboutModal");
+var settingsModal = document.getElementById("settingsModal");
+
+var aboutButton = document.getElementById("aboutButton");
+var settingsButton = document.getElementById("settingsButton");
+
+var aboutModalClose = document.getElementsByClassName("close")[0];
+var settingsModalClose = document.getElementsByClassName("close")[1];
+
+aboutButton.onclick = function() {
+    aboutModal.style.display = "block";
+};
+
+settingsButton.onclick = function() {
+    settingsModal.style.display = "block";
+};
+
+aboutModalClose.onclick = function() {
+    aboutModal.style.display = "none";
+};
+
+settingsModalClose.onclick = function() {
+    settingsModal.style.display = "none";
+};
+
+window.onclick = function(event) {
+    if (event.target == aboutModal) {
+        aboutModal.style.display = "none";
+    }
+
+    if (event.target == settingsModal) {
+        settingsModal.style.display = "none";
+    }
+};

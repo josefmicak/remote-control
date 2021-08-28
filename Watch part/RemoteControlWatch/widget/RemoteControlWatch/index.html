@@ -8,12 +8,35 @@
 </head>
 
 <body>
-	<div class="banner"></div>
+    <div class="clickableButton" id="aboutButton"></div>
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>
+            	Unfortunately, it's not possible to display the information about the app using the widget. Please use the application itself to check out the information.
+            </p>
+        </div> 
+    </div>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>
+            	Unfortunately, it's not possible to change settings using the widget. Please use the application itself to change settings.
+            </p>
+        </div> 
+    </div>
+
+    <div class="clickableButton" id="settingsButton"></div>
     <div class="indicatorLight" id="messageIndicatorLight"></div>
-	<div class="indicatorLight" id="responseIndicatorLight"></div>
-    <button id="leftButton" type="button" onclick="sendText('left');"></button>
-    <button id="rightButton" type="button" onclick="sendText('right');"></button>
-    <button id="spaceButton" type="button" onclick="sendText('space');"></button>
+    <div class="indicatorLight" id="responseIndicatorLight"></div>
+    <button class="clickableButton" id="leftButton" type="button" onclick="sendText('left');"></button>
+    <button class="clickableButton" id="rightButton" type="button" onclick="sendText('right');"></button>
+    <button class="clickableButton" id="spaceButton" type="button" onclick="sendText('space');"></button>
+    <div class="changeableKeyButton" id="changeableKeyButton1" type="button" onclick="sendText('firstButton');"></div>
+    <div class="changeableKeyButton" id="changeableKeyButton2" type="button" onclick="sendText('secondButton');"></div>
+    <div class="changeableKeyButton" id="changeableKeyButton3" type="button" onclick="sendText('thirdButton');"></div>
     <script src="script.js"></script>
 </body>
 </html>
