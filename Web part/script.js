@@ -1,66 +1,45 @@
 var changeableKeyButton1, changeableKeyButton2, changeableKeyButton3;
-window.onload = loadChangableKeyValues;
+window.onload = loadUserSettings;
 
 function sendText(selectedKeyStroke)
 {
-    if(selectedKeyStroke == "firstButton")
+    var username = localStorage.getItem('username');
+    if(null === username)
     {
-        selectedKeyStroke = document.getElementById("changeableKeyButton1").textContent;
+        alert("Please select a username in the settings before using the remote control.");
     }
-    else if(selectedKeyStroke == "secondButton")
+    else
     {
-        selectedKeyStroke = document.getElementById("changeableKeyButton2").textContent;
-    }
-    else if(selectedKeyStroke == "thirdButton")
-    {
-        selectedKeyStroke = document.getElementById("changeableKeyButton3").textContent;
-    }
-    //the space key gets disabled for a second after pressing it because otherwise it keeps being indefinitely automatically pressed
-    if(selectedKeyStroke == "space")
-    {
-        document.getElementById("spaceButton").disabled = true;
-        setTimeout(function()
+        if(selectedKeyStroke == "firstButton")
         {
-            document.getElementById("spaceButton").disabled = false;
-        }, 1000);
-    }
-    var http = new XMLHttpRequest();
-    var url = 'sendKeyStroke.php';
-    var type = 'type=1';
-    var messageKey = 'messageKey=' + Math.floor(Math.random() * 10001);
-    var keyStroke = 'keyStroke=' + selectedKeyStroke;
-    var params = type + '&' + messageKey + '&' + keyStroke;    
-
-    var responseKey = 0;
-    fetch('getKeyValues.php')
-    .then(response => 
-    {
-        return response.json();
-    })
-    .then(response =>
-    {
-        responseKey = response[0].responseKey;
-    });
-
-    http.open('POST', url, true);
-    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    http.onreadystatechange = function()
-    {
-        if(http.readyState == 4 && http.status == 200)
-        {
-            controlIndicatorLight(1, 'y');
-            console.log(selectedKeyStroke + " key pressed");
+            selectedKeyStroke = document.getElementById("changeableKeyButton1").textContent;
         }
-        else
+        else if(selectedKeyStroke == "secondButton")
         {
-            controlIndicatorLight(1, 'n');
+            selectedKeyStroke = document.getElementById("changeableKeyButton2").textContent;
         }
-    };
-    http.send(params);
-
-    setTimeout(function()
-    {
-        var newResponseKey = 0;
+        else if(selectedKeyStroke == "thirdButton")
+        {
+            selectedKeyStroke = document.getElementById("changeableKeyButton3").textContent;
+        }
+        //the space key gets disabled for a second after pressing it because otherwise it keeps being indefinitely automatically pressed
+        if(selectedKeyStroke == "space")
+        {
+            document.getElementById("spaceButton").disabled = true;
+            setTimeout(function()
+            {
+                document.getElementById("spaceButton").disabled = false;
+            }, 1000);
+        }
+        var http = new XMLHttpRequest();
+        var url = 'sendKeyStroke.php';
+        var type = 'type=1';
+        var username = 'username=' + username;
+        var messageKey = 'messageKey=' + Math.floor(Math.random() * 10001);
+        var keyStroke = 'keyStroke=' + selectedKeyStroke;
+        var params = type +  '&' + username + '&' + messageKey + '&' + keyStroke;    
+    
+        var responseKey = 0;
         fetch('getKeyValues.php')
         .then(response => 
         {
@@ -68,20 +47,50 @@ function sendText(selectedKeyStroke)
         })
         .then(response =>
         {
-            newResponseKey = response[0].responseKey;
-        })
-        .then(response =>
+            responseKey = response[0].responseKey;
+        });
+    
+        http.open('POST', url, true);
+        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        http.onreadystatechange = function()
         {
-            if(newResponseKey != responseKey)
+            if(http.readyState == 4 && http.status == 200)
             {
-                controlIndicatorLight(2, 'y');
+                controlIndicatorLight(1, 'y');
+                console.log(selectedKeyStroke + " key pressed");
             }
             else
             {
-                controlIndicatorLight(2, 'n');
+                controlIndicatorLight(1, 'n');
             }
-        });
-    }, 1500);
+        };
+        http.send(params);
+    
+        setTimeout(function()
+        {
+            var newResponseKey = 0;
+            fetch('getKeyValues.php')
+            .then(response => 
+            {
+                return response.json();
+            })
+            .then(response =>
+            {
+                newResponseKey = response[0].responseKey;
+            })
+            .then(response =>
+            {
+                if(newResponseKey != responseKey)
+                {
+                    controlIndicatorLight(2, 'y');
+                }
+                else
+                {
+                    controlIndicatorLight(2, 'n');
+                }
+            });
+        }, 1500);
+    }
 }
 
 function controlIndicatorLight(lightId, success)
@@ -118,8 +127,13 @@ function controlIndicatorLight(lightId, success)
     }
 }
 
-function loadChangableKeyValues()
+function loadUserSettings()
 {
+    var username = localStorage.getItem('username');
+    if(null === username)
+    {
+        username = 'Enter username';
+    }
     var changeableKeyButton1 = localStorage.getItem('changeableKeyButton1');
     if(null === changeableKeyButton1)
     {
@@ -136,17 +150,20 @@ function loadChangableKeyValues()
         changeableKeyButton3 = 'C';
     }
 
+    document.getElementById("username").textContent = username;
     document.getElementById("changeableKeyButton1").textContent = changeableKeyButton1;
     document.getElementById("changeableKeyButton2").textContent = changeableKeyButton2;
     document.getElementById("changeableKeyButton3").textContent = changeableKeyButton3;
 
+    document.getElementById("username").value = username;
     document.getElementById("firstChangeableKey").value = changeableKeyButton1;
     document.getElementById("secondChangeableKey").value = changeableKeyButton2;
     document.getElementById("thirdChangeableKey").value = changeableKeyButton3;
 }
 
-function saveChangableKeyValues()
+function saveUserSettings()
 {
+    localStorage.setItem('username', document.getElementById("username").value);
     localStorage.setItem('changeableKeyButton1', document.getElementById("firstChangeableKey").value);
     localStorage.setItem('changeableKeyButton2', document.getElementById("secondChangeableKey").value);
     localStorage.setItem('changeableKeyButton3', document.getElementById("thirdChangeableKey").value);

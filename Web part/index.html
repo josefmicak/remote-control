@@ -28,7 +28,9 @@
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <form onsubmit="saveChangableKeyValues();">
+                <form onsubmit="saveUserSettings();">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" maxlength="15"><br><br>
                     <label for="firstChangeableKey">First changeable key:</label>
                     <input type="text" id="firstChangeableKey" name="firstChangeableKey" maxlength="1"><br><br>
                     <label for="secondChangeableKey">Second changeable key:</label>

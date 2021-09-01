@@ -4,14 +4,10 @@
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
-    $sql_select = 'SELECT * FROM KeyValues WHERE id = 1';
-    $result = mysqli_query($conn, $sql_select);
-    $keyValuesArray = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-
     $type = $_POST['type'];
     if($type == 1)//message from remote device
     {
+        $username = mysqli_real_escape_string($conn, $_POST['username']);
         $messageKey = mysqli_real_escape_string($conn, $_POST['messageKey']);
         $keyStroke = mysqli_real_escape_string($conn, $_POST['keyStroke']);
         $responseKey = $keyValuesArray[0]['responseKey'];
@@ -22,8 +18,8 @@
         $keyStroke = $keyValuesArray[0]['keyStroke'];
         $responseKey = mysqli_real_escape_string($conn, $_POST['responseKey']);
     }
-    $sql_insert = "INSERT INTO KeyValues(id, messageKey, keyStroke, responseKey)
-    VALUES (1, '$messageKey', '$keyStroke', '$responseKey')
+    $sql_insert = "INSERT INTO RCValues(username, messageKey, keyStroke, responseKey)
+    VALUES ('$username', '$messageKey', '$keyStroke', '$responseKey')
     ON DUPLICATE KEY UPDATE messageKey = '$messageKey', keyStroke = '$keyStroke', responseKey = '$responseKey';";
     if(!mysqli_query($conn, $sql_insert))
     {

@@ -23,55 +23,74 @@ fastScanAmount = 0
 fastScanFrequency = 0
 scanFrequency = 0
 keyPressed = False
+username = "temp"
 
 
 def default_values():
-    global fastScanAmount, fastScanFrequency, scanFrequency
+    global fastScanAmount, fastScanFrequency, scanFrequency, username
     fastScanAmount = 10
     fastScanFrequency = 200
     scanFrequency = 1000
+    username = "Select username"
 
 
 def switch_scan():
-    global scanBoolean, scanFrequency
-    if scanBoolean:
-        scanLabel.config(
-            text="Not scanning for keystrokes",
-            fg="red")
-        scanButton.config(
-            text="Start scanning",
-            fg="green"
-        )
-        scanFrequencyEntry.config(
-            state="normal"
-        )
-        scanFrequencySaveButton.config(
-            state="normal"
-        )
+    global scanBoolean, scanFrequency, username
+    if usernameEntry.get() == "Select username" or len(usernameEntry.get()) == 0:
+        tk.messagebox.showerror("Error", "No username selected.")
+    elif len(usernameEntry.get()) > 15:
+        tk.messagebox.showerror("Error", "Maximum username length is 15 characters.")
     else:
-        window.after(scanFrequency, my_mainloop)
-        scanLabel.config(
-            text="Scanning for keystrokes",
-            fg="green")
-        scanButton.config(
-            text="Stop scanning",
-            fg="red"
-        )
-        scanFrequencyEntry.config(
-            state="disabled"
-        )
-        scanFrequencySaveButton.config(
-            state="disabled"
-        )
-    scanBoolean = not scanBoolean
+        if scanBoolean:
+            scanLabel.config(
+                text="Not scanning for keystrokes",
+                fg="red")
+            scanButton.config(
+                text="Start scanning",
+                fg="green"
+            )
+            scanFrequencyEntry.config(
+                state="normal"
+            )
+            scanFrequencySaveButton.config(
+                state="normal"
+            )
+            usernameEntry.config(
+                state="normal"
+            )
+            usernameSaveButton.config(
+                state="normal"
+            )
+        else:
+            window.after(scanFrequency, my_mainloop)
+            scanLabel.config(
+                text="Scanning for keystrokes",
+                fg="green")
+            scanButton.config(
+                text="Stop scanning",
+                fg="red"
+            )
+            scanFrequencyEntry.config(
+                state="disabled"
+            )
+            scanFrequencySaveButton.config(
+                state="disabled"
+            )
+            usernameEntry.config(
+                state="disabled"
+            )
+            usernameSaveButton.config(
+                state="disabled"
+            )
+        scanBoolean = not scanBoolean
 
 
 def my_mainloop():
-    global oldValue, newValue, iterationsCounter, keyPressed, fastScan, scanFrequency
+    global oldValue, newValue, iterationsCounter, keyPressed, fastScan, scanFrequency, username
     callDelay = scanFrequency
 
     if scanBoolean:
-        response = requests.get("http://testt.8u.cz/getKeyValues.php")
+        response = requests.get("http://testt.8u.cz/getKeyValues.php?username=" + username)
         result = response.text
         result = json.loads(result)
         newValue = result[0].get("messageKey")
@@ -135,8 +154,11 @@ def my_mainloop():
 
 
 def send_response():
-    data = {'responseKey': random.randint(1, 10000),
-            'type': '2'}
+    global username
+    data = {'type': '2',
+            'username': username,
+            'responseKey': random.randint(1, 10000)
+            }
     requests.post(url="http://testt.8u.cz/sendKeyStroke.php", data=data)
 
 
@@ -228,6 +250,17 @@ def callback(url):
 
 def clear_pressed_keys():
     pressedKeysTV.delete(*pressedKeysTV.get_children())
+
+
+def save_username():
+    global username
+    if usernameEntry.get() == "Select username" or len(usernameEntry.get()) == 0:
+        tk.messagebox.showerror("Error", "No username selected.")
+    elif len(usernameEntry.get()) > 15:
+        tk.messagebox.showerror("Error", "Maximum username length is 15 characters.")
+    else:
+        username = usernameEntry.get()
+        tk.messagebox.showinfo("Success", "Username saved successfully.")
 
 
 default_values()
@@ -361,6 +394,26 @@ clearPressedKeysButton = tk.Button(
     command=clear_pressed_keys
 )
 clearPressedKeysButton.grid(row=1)
+
+usernameLF = tk.LabelFrame(text="Username")
+usernameLF.grid(row=2, column=0, columnspan=3, sticky=tk.W)
+
+usernameLabel = tk.Label(
+    usernameLF,
+    text="Username:")
+usernameLabel.grid(row=0, column=0)
+
+usernameEntry = tk.Entry(
+    usernameLF)
+usernameEntry.insert(tk.END, username)
+usernameEntry.grid(row=0, column=2)
+
+usernameSaveButton = tk.Button(
+    usernameLF,
+    text="Save",
+    command=save_username
+)
+usernameSaveButton.grid(row=0, column=4)
 
 window.config(menu=menubar)
 window.mainloop()

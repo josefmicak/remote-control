@@ -5,7 +5,9 @@
     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
     header('Content-Type: application/json');
     
-    $sql_select = 'SELECT * FROM KeyValues WHERE id = 1';
+    $username = mysqli_real_escape_string($conn, $_GET['username']);
+    
+    $sql_select = "SELECT * FROM RCValues WHERE username = '$username'";
     $result = mysqli_query($conn, $sql_select);
     $keyValuesArray = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
