@@ -8,6 +8,9 @@ import random
 import json
 from datetime import datetime
 from pynput.keyboard import Key, Controller
+import sqlite3
+from sqlite3 import Error
+import os
 
 window = tk.Tk()
 menubar = tk.Menu(window)
@@ -24,22 +27,33 @@ fastScanFrequency = 0
 scanFrequency = 0
 keyPressed = False
 username = "temp"
+settingsFileExists = True
 
 
-def default_values():
-    global fastScanAmount, fastScanFrequency, scanFrequency, username
-    fastScanAmount = 10
-    fastScanFrequency = 200
-    scanFrequency = 1000
-    username = "Select username"
+def default_values(conn):
+    global fastScanAmount, fastScanFrequency, scanFrequency, username, settingsFileExists
+
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Settings")
+    rows = list(cur.fetchall())
+    for row in rows:
+        username = row[1]
+        scanFrequency = row[2]
+        fastScanFrequency = row[3]
+        fastScanAmount = row[4]
+
+    if len(rows) == 0:
+        settingsFileExists = False
+        fastScanAmount = 10
+        fastScanFrequency = 200
+        scanFrequency = 1000
+        username = "Select username"
 
 
 def switch_scan():
-    global scanBoolean, scanFrequency, username
-    if usernameEntry.get() == "Select username" or len(usernameEntry.get()) == 0:
+    global scanBoolean, scanFrequency, username, settingsFileExists
+    if not settingsFileExists:
         tk.messagebox.showerror("Error", "No username selected.")
-    elif len(usernameEntry.get()) > 15:
-        tk.messagebox.showerror("Error", "Maximum username length is 15 characters.")
     else:
         if scanBoolean:
             scanLabel.config(
@@ -194,11 +208,14 @@ def fast_scan_switch():
 
 
 def fast_scan_save():
-    global fastScanAmount, fastScanFrequency, scanFrequency
+    global fastScanAmount, fastScanFrequency, scanFrequency, settingsFileExists
     if int(fastScanFrequencyEntry.get()) > scanFrequency:
         tk.messagebox.showerror("Error", ("Error: The fast scan frequency (" + (fastScanFrequencyEntry.get()) +
                                           ") is higher than the scan frequency (" + str(scanFrequency) + ").\n" +
                                           "Please input a lower value."))
+    elif not settingsFileExists:
+        tk.messagebox.showerror("No username selected.",
+                                "No username selected. Please select a username before performing other operations.")
     else:
         fastScanAmount = int(fastScanAmountEntry.get())
         fastScanFrequency = int(fastScanFrequencyEntry.get())
@@ -217,11 +234,14 @@ def fast_scan_about():
 
 
 def scan_frequency_save():
-    global scanFrequency, fastScanFrequency, fastScan
+    global scanFrequency, fastScanFrequency, fastScan, settingsFileExists
     if int(scanFrequencyEntry.get()) < fastScanFrequency and (fastScan.get() == True):
         tk.messagebox.showerror("Error", "Error: The scan frequency (" + scanFrequencyEntry.get() +
                                 ") is lower than the fast scan frequency (" + str(fastScanFrequency) + ").\n" +
                                 "Please either input a higher value or disable fast scan.")
+    elif not settingsFileExists:
+        tk.messagebox.showerror("No username selected.",
+                                "No username selected. Please select a username before performing other operations.")
     else:
         scanFrequency = int(scanFrequencyEntry.get())
         tk.messagebox.showinfo("Success", "Scan frequency updated successfully")
@@ -253,17 +273,60 @@ def clear_pressed_keys():
 
 
 def save_username():
-    global username
+    global username, scanFrequency, fastScanFrequency, fastScanAmount, settingsFileExists
     if usernameEntry.get() == "Select username" or len(usernameEntry.get()) == 0:
         tk.messagebox.showerror("Error", "No username selected.")
     elif len(usernameEntry.get()) > 15:
         tk.messagebox.showerror("Error", "Maximum username length is 15 characters.")
     else:
         username = usernameEntry.get()
+        values = ("1", usernameEntry.get(), scanFrequency, fastScanFrequency, fastScanAmount,
+                  usernameEntry.get(), scanFrequency, fastScanFrequency, fastScanAmount)
+        sql = """INSERT INTO Settings(id, username, scan_frequency, fast_scan_frequency, fast_scan_amount)
+                  VALUES(?,?,?,?,?)
+                  ON CONFLICT(id) DO UPDATE SET username = ?, scan_frequency = ?,
+                  fast_scan_frequency = ?, fast_scan_amount = ?"""
+        cur = conn.cursor()
+        cur.execute(sql, values)
+        conn.commit()
+        settingsFileExists = True
         tk.messagebox.showinfo("Success", "Username saved successfully.")
 
 
-default_values()
+def database_connection(db_file):
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+        return conn
+    except Error as e:
+        print(e)
+
+    return conn
+
+
+def create_table(conn, create_table_sql):
+    try:
+        c = conn.cursor()
+        c.execute(create_table_sql)
+    except Error as e:
+        print(e)
+
+
+sql_create_settings_table = """CREATE TABLE IF NOT EXISTS settings(
+                                    id integer PRIMARY KEY,
+                                    username text NOT NULL,
+                                    scan_frequency integer NOT NULL,
+                                    fast_scan_frequency integer NOT NULL,
+                                    fast_scan_amount integer NOT NULL
+                                );"""
+
+conn = database_connection(os.getcwd() + r"\db\Settings.db")
+if conn is not None:
+    create_table(conn, sql_create_settings_table)
+else:
+    print("Error! cannot create the database connection.")
+
+default_values(conn)
 
 filemenu = tk.Menu(menubar, tearoff=0)
 filemenu.add_command(label="Exit", command=window.destroy, accelerator="Alt+F4")

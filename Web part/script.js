@@ -129,10 +129,11 @@ function controlIndicatorLight(lightId, success)
 
 function loadUserSettings()
 {
+    var usernameLoaded = true;
     var username = localStorage.getItem('username');
     if(null === username)
     {
-        username = 'Enter username';
+        usernameLoaded = false;
     }
     var changeableKeyButton1 = localStorage.getItem('changeableKeyButton1');
     if(null === changeableKeyButton1)
@@ -150,12 +151,16 @@ function loadUserSettings()
         changeableKeyButton3 = 'C';
     }
 
-    document.getElementById("username").textContent = username;
+    if(usernameLoaded)
+    {
+        document.getElementById("username").textContent = username;
+        document.getElementById("username").value = username;
+    }
+    
     document.getElementById("changeableKeyButton1").textContent = changeableKeyButton1;
     document.getElementById("changeableKeyButton2").textContent = changeableKeyButton2;
     document.getElementById("changeableKeyButton3").textContent = changeableKeyButton3;
 
-    document.getElementById("username").value = username;
     document.getElementById("firstChangeableKey").value = changeableKeyButton1;
     document.getElementById("secondChangeableKey").value = changeableKeyButton2;
     document.getElementById("thirdChangeableKey").value = changeableKeyButton3;
