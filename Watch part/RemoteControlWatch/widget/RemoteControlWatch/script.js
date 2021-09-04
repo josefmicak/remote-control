@@ -8,12 +8,12 @@ document.addEventListener('tizenhwkey', function(e) {
 	}
 });}
 
-var changeableKeyButton1, changeableKeyButton2, changeableKeyButton3;
-window.onload = loadChangableKeyValues;
+var changeableKeyButton1, changeableKeyButton2, changeableKeyButton3, loadedUsername;
+window.onload = loadUserSettings;
 
 function sendText(selectedKeyStroke)
 {
-    if(selectedKeyStroke == "firstButton")
+	if(selectedKeyStroke == "firstButton")
     {
         selectedKeyStroke = document.getElementById("changeableKeyButton1").textContent;
     }
@@ -35,14 +35,15 @@ function sendText(selectedKeyStroke)
         }, 1000);
     }
     var http = new XMLHttpRequest();
-    var url = 'sendKeyStroke.php';
+    var url = 'http://testt.8u.cz/sendKeyStroke.php';
     var type = 'type=1';
+    var username = 'username=' + loadedUsername;
     var messageKey = 'messageKey=' + Math.floor(Math.random() * 10001);
     var keyStroke = 'keyStroke=' + selectedKeyStroke;
-    var params = type + '&' + messageKey + '&' + keyStroke;    
+    var params = type +  '&' + username + '&' + messageKey + '&' + keyStroke;
 
     var responseKey = 0;
-    fetch('getKeyValues.php')
+    fetch('http://testt.8u.cz/getKeyValues.php')
     .then(response => 
     {
         return response.json();
@@ -71,7 +72,7 @@ function sendText(selectedKeyStroke)
     setTimeout(function()
     {
         var newResponseKey = 0;
-        fetch('getKeyValues.php')
+        fetch('http://testt.8u.cz/getKeyValues.php')
         .then(response => 
         {
             return response.json();
@@ -128,38 +129,12 @@ function controlIndicatorLight(lightId, success)
     }
 }
 
-function loadChangableKeyValues()
-{
-    var changeableKeyButton1 = localStorage.getItem('changeableKeyButton1');
-    if(null === changeableKeyButton1)
-    {
-        changeableKeyButton1 = 'A';
-    }
-    var changeableKeyButton2 = localStorage.getItem('changeableKeyButton2');
-    if(null === changeableKeyButton2)
-    {
-        changeableKeyButton2 = 'B';
-    }
-    var changeableKeyButton3 = localStorage.getItem('changeableKeyButton3');
-    if(null === changeableKeyButton3)
-    {
-        changeableKeyButton3 = 'C';
-    }
-
-    document.getElementById("changeableKeyButton1").textContent = changeableKeyButton1;
-    document.getElementById("changeableKeyButton2").textContent = changeableKeyButton2;
-    document.getElementById("changeableKeyButton3").textContent = changeableKeyButton3;
-
-    document.getElementById("firstChangeableKey").value = changeableKeyButton1;
-    document.getElementById("secondChangeableKey").value = changeableKeyButton2;
-    document.getElementById("thirdChangeableKey").value = changeableKeyButton3;
-}
-
-function saveChangableKeyValues()
-{
-    localStorage.setItem('changeableKeyButton1', document.getElementById("firstChangeableKey").value);
-    localStorage.setItem('changeableKeyButton2', document.getElementById("secondChangeableKey").value);
-    localStorage.setItem('changeableKeyButton3', document.getElementById("thirdChangeableKey").value);
+function loadUserSettings()
+{   
+	loadedUsername = tizen.preference.getValue('username'); 
+    document.getElementById("changeableKeyButton1").textContent = tizen.preference.getValue('changeableKeyButton1');
+    document.getElementById("changeableKeyButton2").textContent = tizen.preference.getValue('changeableKeyButton2');
+    document.getElementById("changeableKeyButton3").textContent = tizen.preference.getValue('changeableKeyButton3');
 }
 
 var aboutModal = document.getElementById("aboutModal");
