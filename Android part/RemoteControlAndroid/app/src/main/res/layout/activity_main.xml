@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".MainActivity">
+
+    <ImageButton
+        android:id="@+id/leftButton"
+        android:layout_width="165dp"
+        android:layout_height="132dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="140dp"
+        android:onClick="sendText"
+        android:tag="left"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/leftarrow" />
+
+    <ImageButton
+        android:id="@+id/rightButton"
+        android:layout_width="165dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="28dp"
+        android:onClick="sendText"
+        android:tag="right"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/rightarrow" />
+
+    <ImageButton
+        android:id="@+id/spaceButton"
+        android:layout_width="355dp"
+        android:layout_height="141dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="332dp"
+        android:onClick="sendText"
+        android:tag="space"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/spacebar" />
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="51dp"
+        android:layout_height="59dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/settingsButton"
+        android:layout_width="64dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="28dp"
+        android:onClick="onSettingsButton"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/settings" />
+
+    <ImageButton
+        android:id="@+id/aboutButton"
+        android:layout_width="64dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="104dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/about" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

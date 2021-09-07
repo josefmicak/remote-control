@@ -35,3 +35,9 @@ Provides a way to perform remote key presses using a website. The .php files are
 *Languages used: HTML, CSS, JavaScript*
 
 Provides a way to perform remote key presses using a smart watch. The application has been successfully tested on a real device (Samsung Galaxy Watch Active2) and it can probably only be used on Tizen OS-based watches. Includes a widget.
+
+
+## Android part
+
+*Languages used: Java*
+Provides a way to perform remote key presses using a phone with Android OS. This part is still under development and there are yet features to be added.
