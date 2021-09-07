@@ -104,7 +104,7 @@ def my_mainloop():
     callDelay = scanFrequency
 
     if scanBoolean:
-        response = requests.get("http://testt.8u.cz/getKeyValues.php?username=" + username)
+        response = requests.get("http://rc.8u.cz/getKeyValues.php?username=" + username)
         result = response.text
         result = json.loads(result)
         newValue = result[0].get("messageKey")
@@ -173,7 +173,7 @@ def send_response():
             'username': username,
             'responseKey': random.randint(1, 10000)
             }
-    requests.post(url="http://testt.8u.cz/sendKeyStroke.php", data=data)
+    requests.post(url="http://rc.8u.cz/sendKeyStroke.php", data=data)
 
 
 def fast_scan_switch():

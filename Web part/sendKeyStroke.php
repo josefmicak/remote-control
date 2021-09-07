@@ -3,6 +3,11 @@
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+    
+    $sql_select = "SELECT * FROM RCValues WHERE username = '$username'";
+    $result = mysqli_query($conn, $sql_select);
+    $keyValuesArray = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
 
     $type = $_POST['type'];
     if($type == 1)//message from remote device
@@ -11,6 +16,7 @@
         $messageKey = mysqli_real_escape_string($conn, $_POST['messageKey']);
         $keyStroke = mysqli_real_escape_string($conn, $_POST['keyStroke']);
         $responseKey = $keyValuesArray[0]['responseKey'];
+        echo "test";
     }
     else//response from desktop
     {

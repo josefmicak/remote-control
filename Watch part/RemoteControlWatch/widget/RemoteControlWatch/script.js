@@ -35,7 +35,7 @@ function sendText(selectedKeyStroke)
         }, 1000);
     }
     var http = new XMLHttpRequest();
-    var url = 'http://testt.8u.cz/sendKeyStroke.php';
+    var url = 'http://rc.8u.cz/sendKeyStroke.php';
     var type = 'type=1';
     var username = 'username=' + loadedUsername;
     var messageKey = 'messageKey=' + Math.floor(Math.random() * 10001);
@@ -43,7 +43,7 @@ function sendText(selectedKeyStroke)
     var params = type +  '&' + username + '&' + messageKey + '&' + keyStroke;
 
     var responseKey = 0;
-    fetch('http://testt.8u.cz/getKeyValues.php')
+    fetch('http://rc.8u.cz/getKeyValues.php')
     .then(response => 
     {
         return response.json();
@@ -72,7 +72,7 @@ function sendText(selectedKeyStroke)
     setTimeout(function()
     {
         var newResponseKey = 0;
-        fetch('http://testt.8u.cz/getKeyValues.php')
+        fetch('http://rc.8u.cz/getKeyValues.php')
         .then(response => 
         {
             return response.json();
