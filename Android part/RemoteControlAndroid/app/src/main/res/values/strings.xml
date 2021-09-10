@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">RemoteControlAndroid</string>
+    <string name="indicator_lights">The page contains two <font color='cyan'>cyan</font> indicator lights.
+        The lights briefly turn <font color='green'>green</font> if an action is successful and <font color='red'>red</font> if an action is unsuccessful.
+        The first light checks whether the key press has been successfully sent.
+        This is mostly useful on the smart watch because they don\'t require uninterrupted internet connection to function.
+        The second light checks whether the key press has been successfully performed.
+        This doesn\'t happen in case the desktop part is not currently running. </string>
+    <string name="general_information">This website is part of a project called "Remote control".\n
+        Its purpose is to make it possible to control your computer from remote devices.\n
+        Further explanation, as well as the source code can be obtained at <a href="https://github.com/josefmicak/remote-control">https://github.com/josefmicak/remote-control</a></string>
 </resources>

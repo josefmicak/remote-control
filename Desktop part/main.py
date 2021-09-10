@@ -320,7 +320,7 @@ sql_create_settings_table = """CREATE TABLE IF NOT EXISTS settings(
                                     fast_scan_amount integer NOT NULL
                                 );"""
 
-conn = database_connection(os.getcwd() + r"\db\Settings.db")
+conn = database_connection(os.getcwd() + r"\Settings.db")
 if conn is not None:
     create_table(conn, sql_create_settings_table)
 else:

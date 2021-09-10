@@ -4,28 +4,113 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:onClick="onSaveButton">
+
+    <TextView
+        android:id="@+id/thirdKeyTV"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:text="Third key:"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondKeyTV" />
+
+    <EditText
+        android:id="@+id/thirdKeyET"
+        android:layout_width="216dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Select third key"
+        android:inputType="textPersonName"
+        android:maxLength="15"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondKeyET" />
+
+    <TextView
+        android:id="@+id/secondKeyTV"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:text="Second key:"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstKeyTV" />
+
+    <EditText
+        android:id="@+id/secondKeyET"
+        android:layout_width="216dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Select second key"
+        android:inputType="textPersonName"
+        android:maxLength="15"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstKeyET" />
+
+    <TextView
+        android:id="@+id/firstKeyTV"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:text="First key:"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTV" />
+
+    <EditText
+        android:id="@+id/firstKeyET"
+        android:layout_width="216dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Select first key"
+        android:inputType="textPersonName"
+        android:maxLength="15"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameET" />
 
     <TextView
         android:id="@+id/usernameTV"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="92dp"
         android:text="Username:"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/usernameET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_width="237dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="92dp"
         android:ems="10"
         android:hint="Select your username"
         android:inputType="textPersonName"
         android:maxLength="15"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,10 +119,12 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="#FFFFFF"
         android:onClick="onSaveButton"
         android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thirdKeyTV" />
 </androidx.constraintlayout.widget.ConstraintLayout>
