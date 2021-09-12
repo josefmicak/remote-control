@@ -157,4 +157,24 @@
         app:layout_constraintStart_toStartOf="@+id/secondKeyView"
         app:layout_constraintTop_toTopOf="@+id/secondKeyView" />
 
+    <ImageView
+        android:id="@+id/messageIndicatorLight"
+        android:layout_width="37dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        app:srcCompat="@drawable/circle"
+        app:layout_constraintEnd_toStartOf="@+id/responseIndicatorLight"
+        app:layout_constraintTop_toBottomOf="@+id/aboutButton" />
+
+    <ImageView
+        android:id="@+id/responseIndicatorLight"
+        android:layout_width="37dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="35dp"
+        app:srcCompat="@drawable/circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
